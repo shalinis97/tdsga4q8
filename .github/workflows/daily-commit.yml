@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
-      - name: Add daily commit by 24ds1000082@ds.study.iitm.ac.in
+      - name: Add daily commit by 24f2006531@ds.study.iitm.ac.in
         run: |
           echo "Daily commit on $(date)" >> daily_commit_log.txt
           git config --global user.name "github-actions[bot]"
