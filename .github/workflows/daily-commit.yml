@@ -1,23 +1,27 @@
-name: Daily Auto Commit
+name: Daily Commit Workflow
 
 on:
+  push:
+    branches:
+      - main
   schedule:
-    - cron: '0 9 * * *'
-  workflow_dispatch:
+    - cron: '0 2 * * *'
+
+permissions:
+  contents: write  # Grants permission to push changes
 
 jobs:
   daily-commit:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Make a daily update - 24f2006531@ds.study.iitm.ac.in
-      run: |
-        echo "Daily update: $(date)" >> daily-log.txt
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add daily-log.txt
-        git commit -m "chore: daily log update $(date)"
-        git push
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Add daily commit by 24ds1000082@ds.study.iitm.ac.in
+        run: |
+          echo "Daily commit on $(date)" >> daily_commit_log.txt
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add daily_commit_log.txt
+          git commit -m "Daily commit: $(date)" || echo "No changes to commit"
+          git push
